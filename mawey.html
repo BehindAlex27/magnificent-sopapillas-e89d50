@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAWEY · Food truck</title>
+<meta name="description" content="MAWEY, food truck de raíz mexicana con sabores del Mediterráneo y del mundo. Festivales, eventos corporativos y fiestas privadas. Una marca BEHIND.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: relajado, auténtico, con hambre
+   IDEA: la ventanilla del truck: ves, se te antoja, pides
+   PICTURE: platillos en arcos, sello giratorio con el molcajete
+   COLOUR/TYPE: olivo dominante, champán, ocre; Fraunces + Jost
+   LAYOUT: bandas a todo lo ancho; armador de antojo interactivo */
+:root{--ol:#2F3A1F;--ol2:#6B7A45;--oc:#B8860B;--oc2:#D19C1D;--va:#F3E5AB;--ch:#F7E7CE;color-scheme:light}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--ch);color:var(--ol);font:300 17px/1.6 Jost,system-ui,sans-serif;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+.ic{width:1em;height:1em;flex:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 max(5vw,18px)}
+.band{padding:clamp(64px,9vw,128px) 0}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:600;line-height:1.02;margin:0;text-wrap:balance}
+h1{font-size:clamp(46px,6.4vw,84px)}h2{font-size:clamp(34px,4.4vw,56px)}h3{font-size:24px}
+em{font-style:italic;font-weight:500;color:var(--oc)}
+.kicker{font:500 14px/1.4 Jost,sans-serif;color:var(--oc);margin:0 0 16px;display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:28px;height:2px;background:currentColor}
+.lead{font-size:19px;max-width:56ch}
+.arch{border-radius:999px 999px 8px 8px;overflow:hidden;background:var(--va)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 30px;border-radius:999px;background:var(--oc);color:var(--ch);text-decoration:none;font-weight:400;font-size:17px;transition:background .25s,transform .25s}
+.btn:hover{background:var(--oc2);transform:translateY(-2px)}
+.btn .ic{font-size:22px}
+.btn.ghost{background:transparent;border:1px solid currentColor;color:inherit}
+:focus-visible{outline:2px solid var(--oc);outline-offset:3px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s}.rv.on{opacity:1;transform:none}
+nav{position:sticky;top:0;z-index:30;background:rgba(47,58,31,.95);backdrop-filter:blur(10px);color:var(--ch)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:70px;gap:18px}
+nav .logo img{height:30px;width:auto}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:15px}
+nav ul a{text-decoration:none;opacity:.8}nav ul a:hover{opacity:1}
+nav .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--va);text-decoration:none;border:1px solid rgba(243,229,171,.4);padding:8px 14px;border-radius:999px}
+@media(max-width:900px){nav ul{display:none}}
+.hero{background:var(--ol);color:var(--ch);overflow:hidden;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,80px);align-items:center;padding-block:clamp(56px,7vw,104px)}
+.hero .lead{color:var(--va)}
+.hero .pic{position:relative;justify-self:end;width:100%;max-width:470px}
+.hero .arch{aspect-ratio:4/5;box-shadow:0 0 0 14px var(--ol),0 0 0 16px var(--oc)}
+.cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.seal{position:absolute;left:-60px;bottom:30px;width:156px;height:156px;border-radius:50%;background:var(--ch);display:grid;place-items:center;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,.3);transition:transform .3s}
+.seal:hover{transform:scale(1.06) rotate(-4deg)}
+.seal svg.ring{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);animation:spin 20s linear infinite}
+.seal img{width:58px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+.tags span{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:rgba(247,231,206,.08);color:var(--va);font-size:15px}
+.tags .ic{font-size:19px;color:var(--oc2)}
+.mq{overflow:hidden}
+.mq .tr{display:flex;width:max-content;animation:mq 40s linear infinite}
+.mq.rev .tr{animation-direction:reverse}
+.mq:hover .tr{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.food{background:var(--oc);padding:56px 0 64px}
+.food .tr{gap:22px}
+.food .arch{width:clamp(170px,19vw,250px);aspect-ratio:3/4;flex:none;box-shadow:0 0 0 6px var(--oc),0 0 0 8px var(--ch)}
+.food .arch:nth-child(even){margin-top:40px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:center}
+.two .arch{aspect-ratio:3/4;max-width:440px}
+.story p{margin:0 0 16px;max-width:56ch}
+.steps3{display:flex;gap:14px;align-items:center;margin-top:30px;flex-wrap:wrap}
+.steps3 span{display:inline-flex;align-items:center;gap:8px;font:500 18px Fraunces,serif}
+.steps3 .ic{font-size:22px;color:var(--oc)}
+.steps3 i{width:30px;height:1px;background:var(--ol2)}
+/* video */
+.vband{background:var(--ol);padding:clamp(48px,7vw,96px) 0}
+.vid{position:relative;border-radius:clamp(120px,24vw,340px) clamp(120px,24vw,340px) 12px 12px;overflow:hidden;aspect-ratio:16/7;background:#000;box-shadow:0 0 0 10px var(--ol),0 0 0 12px var(--oc)}
+.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(31,39,20,.85),transparent 55%)}
+.vid .cap{position:absolute;left:clamp(20px,4vw,56px);bottom:clamp(20px,4vw,44px);z-index:1;color:var(--ch)}
+.vid .cap h2{font-size:clamp(30px,4vw,52px)}
+.pp{position:absolute;right:20px;bottom:20px;z-index:2;width:52px;height:52px;border-radius:50%;border:1px solid rgba(247,231,206,.5);background:rgba(31,39,20,.5);color:var(--ch);display:grid;place-items:center;cursor:pointer;font-size:22px}
+@media(max-width:600px){.vid{aspect-ratio:4/5}.vid .cap{right:84px}}
+/* armador */
+.build{background:var(--va)}
+.bd{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(28px,5vw,72px);margin-top:46px;align-items:start}
+.q{margin-bottom:34px}
+.q>b{display:block;font:600 22px Fraunces,serif;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips label{cursor:pointer;position:relative}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;gap:9px;padding:12px 18px;border-radius:999px;border:1.5px solid var(--ol);font-size:16px;transition:all .2s;min-height:48px}
+.chips .ic{font-size:21px}
+.chips input:checked+span{background:var(--ol);color:var(--ch)}
+.chips input:checked+span .ic{color:var(--oc2)}
+.chips input:focus-visible+span{outline:2px solid var(--oc);outline-offset:3px}
+.chips span:hover{transform:translateY(-2px)}
+.range{display:flex;align-items:center;gap:20px}
+.range output{font:600 clamp(40px,5vw,56px)/1 Fraunces,serif;min-width:4ch;color:var(--oc)}
+input[type=range]{flex:1;accent-color:var(--ol);height:44px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row2 label{display:grid;gap:6px;font-size:14px}
+.row2 input{font:16px Jost,sans-serif;padding:13px;border-radius:8px;border:1.5px solid var(--ol);background:var(--ch);color:var(--ol);width:100%}
+.ticket{position:sticky;top:96px;background:var(--ol);color:var(--ch);border-radius:200px 200px 12px 12px;padding:64px 30px 32px;text-align:center}
+.ticket img{width:64px;margin:0 auto 16px}
+.ticket h3{font-size:28px;margin-bottom:16px}
+.ticket ul{list-style:none;padding:0;margin:0 0 26px;text-align:left;display:grid;gap:10px;font-size:15px;color:var(--va)}
+.ticket li{display:flex;gap:10px;border-bottom:1px dashed rgba(243,229,171,.3);padding-bottom:10px}
+.ticket li b{color:var(--ch);font-weight:400;margin-left:auto;text-align:right}
+.ticket .btn{width:100%;justify-content:center}
+@media(max-width:860px){.bd{grid-template-columns:1fr}.ticket{position:static}}
+.tray{background:var(--ol);color:var(--ch);overflow:hidden}
+.big span{font:600 clamp(44px,7vw,96px)/1.1 Fraunces,serif;padding:0 30px;white-space:nowrap;display:flex;align-items:center;gap:60px}
+.big span::after{content:"";width:46px;height:46px;background:url(mawey_isotipo_ocre.svg) center/contain no-repeat}
+.big.rev span{color:transparent;-webkit-text-stroke:1.5px var(--va)}
+.tray .mq{margin-top:12px}
+.tray .also{margin-top:40px;color:var(--va)}
+@media(max-width:820px){.hero .wrap,.two{grid-template-columns:1fr}.hero .pic{justify-self:center;max-width:330px;margin-left:44px}.two .arch{max-width:340px;margin:0 auto}.seal{width:124px;height:124px;left:-48px}.seal img{width:46px}}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.float{position:fixed;right:20px;bottom:20px;z-index:40;display:inline-flex;align-items:center;gap:10px;padding:0 22px;min-height:56px;border-radius:999px;background:var(--oc);color:var(--ch);text-decoration:none;box-shadow:0 10px 26px rgba(0,0,0,.3);transform:translateY(120px);transition:transform .4s}
+.float.on{transform:none}.float .ic{font-size:24px}
+footer{background:#1f2714;color:var(--va);font-size:14px;padding:32px 0 96px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.mq .tr,.seal svg.ring{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></symbol><symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7l-10 10" /><path d="M8 7l9 0l0 9" /></symbol><symbol id="i-brand-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></symbol><symbol id="i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9" /><path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" /><path d="M12 12l0 .01" /><path d="M3 13a20 20 0 0 0 18 0" /></symbol><symbol id="i-cake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18v-8a3 3 0 0 0 -3 -3h-12a3 3 0 0 0 -3 3v8" /><path d="M3 14.803c.312 .135 .654 .204 1 .197a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2 -1a2.4 2.4 0 0 1 2 -1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1c.35 .007 .692 -.062 1 -.197" /><path d="M12 4l1.465 1.638a2 2 0 1 1 -3.015 .099l1.55 -1.737" /></symbol><symbol id="i-chef-hat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.918 0 3.52 1.35 3.91 3.151a4 4 0 0 1 2.09 7.723l0 7.126h-12v-7.126a4 4 0 1 1 2.092 -7.723a4 4 0 0 1 3.908 -3.151" /><path d="M6.161 17.009l11.839 -.009" /></symbol><symbol id="i-confetti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h2" /><path d="M5 4v2" /><path d="M11.5 4l-.5 2" /><path d="M18 5h2" /><path d="M19 4v2" /><path d="M15 9l-1 1" /><path d="M18 13l2 -.5" /><path d="M18 19h2" /><path d="M19 18v2" /><path d="M14 16.518l-6.518 -6.518l-4.39 9.58a1 1 0 0 0 1.329 1.329l9.579 -4.39" /></symbol><symbol id="i-glass-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21l8 0" /><path d="M12 15l0 6" /><path d="M17 3l1 7c0 3.012 -2.686 5 -6 5s-6 -1.988 -6 -5l1 -7h10" /><path d="M6 10a5 5 0 0 1 6 0a5 5 0 0 0 6 0" /></symbol><symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></symbol><symbol id="i-player-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -12" /><path d="M14 6a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1l0 -12" /></symbol><symbol id="i-player-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16l13 -8l-13 -8" /></symbol><symbol id="i-salad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a1 1 0 0 1 1 1v.5c0 1.5 -2.517 5.573 -4 6.5v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1c-1.687 -1.054 -4 -5 -4 -6.5v-.5a1 1 0 0 1 1 -1" /><path d="M18.5 11c.351 -1.017 .426 -2.236 .5 -3.714v-1.286h-2.256c-2.83 0 -4.616 .804 -5.64 2.076" /><path d="M5.255 11.008a12.204 12.204 0 0 1 -.255 -2.008v-1h1.755c.98 0 1.801 .124 2.479 .35" /><path d="M8 8l1 -4l4 2.5" /><path d="M13 11v-.5a2.5 2.5 0 1 0 -5 0v.5" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" /></symbol><symbol id="i-speakerphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a3 3 0 0 1 0 6" /><path d="M10 8v11a1 1 0 0 1 -1 1h-1a1 1 0 0 1 -1 -1v-5" /><path d="M12 8l4.524 -3.77a.9 .9 0 0 1 1.476 .692v12.156a.9 .9 0 0 1 -1.476 .692l-4.524 -3.77h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h8" /></symbol><symbol id="i-tent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" /></symbol><symbol id="i-tools-kitchen-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3v12h-5c-.023 -3.681 .184 -7.406 5 -12m0 12v6h-1v-3m-10 -14v17m-3 -17v3a3 3 0 1 0 6 0v-3" /></symbol><symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" /></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></symbol></svg><!-- #i-player-play -->
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="MAWEY, inicio"><img src="mawey_horizontal_principal_fondo_oscuro.svg" alt="MAWEY"></a>
+    <ul>
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#antojo">Arma tu evento</a></li>
+      <li><a href="#trayectoria">Dónde nos has visto</a></li>
+    </ul>
+    <a class="back" href="index.html">Una marca BEHIND <svg class="ic"><use href="#i-arrow-up-right"/></svg></a>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div class="rv">
+      <p class="kicker">Food truck · Eventos · Festivales</p>
+      <h1>Raíz mexicana. <em>Sabores del mundo.</em></h1>
+      <p class="lead">En MAWEY cocinamos lo que nos gusta comer: sabores mexicanos mezclados con ingredientes del Mediterráneo y de otras partes del mundo.</p>
+      <div class="cta"><a class="btn" href="#antojo">Lleva el truck a tu evento <svg class="ic"><use href="#i-arrow-right"/></svg></a></div>
+      <div class="tags">
+        <span><svg class="ic"><use href="#i-tent"/></svg>Festivales</span>
+        <span><svg class="ic"><use href="#i-briefcase"/></svg>Corporativos</span>
+        <span><svg class="ic"><use href="#i-confetti"/></svg>Fiestas privadas</span>
+        <span><svg class="ic"><use href="#i-speakerphone"/></svg>Activaciones</span>
+      </div>
+    </div>
+    <div class="pic rv">
+      <div class="arch"><img src="m_hero.jpg" alt="Taco al pastor con piña tatemada, cebolla morada y cilantro"></div>
+      <a class="seal" href="#antojo" aria-label="Arma tu evento">
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text font-family="Jost" font-weight="500" font-size="8.6" fill="#2F3A1F"><textPath href="#circ" textLength="236" lengthAdjust="spacing">RAÍZ MEXICANA · SABORES DEL MUNDO ·</textPath></text></svg>
+        <img src="mawey_isotipo_ocre.svg" alt="">
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="food"><div class="mq"><div class="tr" id="food"></div></div></div>
+
+<section class="band" id="historia">
+  <div class="wrap two">
+    <div class="arch rv"><img src="m_tacos.jpg" alt="Tres tacos sobre tabla de madera con limones" loading="lazy" style="object-position:40% 50%"></div>
+    <div class="story rv">
+      <p class="kicker">Nuestra historia</p>
+      <h2 style="margin-bottom:24px">De nuestras raíces a <em>nuevos sabores</em></h2>
+      <p>Empezamos con un food truck llamado Tacote. Con él salimos a la calle y recorrimos festivales y eventos como Fórmula 1, Vive Latino, Corona Capital, Tecate Pa’l Norte, Tecate Comuna y Flow Fest.</p>
+      <p>Con el tiempo, para innovar, quisimos experimentar con otros ingredientes, otras técnicas y otras cocinas, y ofrecer algo mejor y más interesante a la gente que nos sigue.</p>
+      <p>Así nació MAWEY. El molcajete se quedó con nosotros, porque ahí empezó todo.</p>
+      <div class="steps3"><span><svg class="ic"><use href="#i-truck"/></svg>Raíces</span><i></i><span><svg class="ic"><use href="#i-chef-hat"/></svg>Experimentar</span><i></i><span><svg class="ic"><use href="#i-sparkles"/></svg>MAWEY</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="vband">
+  <div class="wrap">
+    <div class="vid rv">
+      <video id="vb" src="v_mawey_truck.mp4" poster="v_mawey_truck.jpg" muted loop playsinline autoplay aria-label="Video del food truck: letrero de neón y gente comiendo"></video>
+      <div class="cap"><p class="kicker">En el truck</p><h2>Así se vive <em>MAWEY</em></h2></div>
+      <button class="pp" id="pp" aria-label="Pausar video"><svg class="ic"><use href="#i-player-pause"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section class="band build" id="antojo">
+  <div class="wrap">
+    <p class="kicker rv">Arma tu evento</p>
+    <h2 class="rv">Cuéntanos qué buscas y <em>te damos opciones</em></h2>
+    <div class="bd">
+      <form id="f" class="rv">
+        <div class="q"><b>¿Qué tipo de evento es?</b>
+          <div class="chips" role="radiogroup" aria-label="Tipo de evento">
+            <label><input type="radio" name="t" value="Festival" checked><span><svg class="ic"><use href="#i-tent"/></svg>Festival</span></label>
+            <label><input type="radio" name="t" value="Corporativo"><span><svg class="ic"><use href="#i-briefcase"/></svg>Corporativo</span></label>
+            <label><input type="radio" name="t" value="Fiesta privada"><span><svg class="ic"><use href="#i-confetti"/></svg>Fiesta privada</span></label>
+            <label><input type="radio" name="t" value="Boda"><span><svg class="ic"><use href="#i-heart"/></svg>Boda</span></label>
+            <label><input type="radio" name="t" value="Activación de marca"><span><svg class="ic"><use href="#i-speakerphone"/></svg>Activación</span></label>
+          </div>
+        </div>
+        <div class="q"><b>¿Qué se te antoja? <small style="font:300 15px Jost">(elige varios)</small></b>
+          <div class="chips">
+            <label><input type="checkbox" name="a" value="Tacos"><span><svg class="ic"><use href="#i-tools-kitchen-2"/></svg>Tacos</span></label>
+            <label><input type="checkbox" name="a" value="Entre panes"><span><svg class="ic"><use href="#i-chef-hat"/></svg>Entre panes</span></label>
+            <label><input type="checkbox" name="a" value="Para compartir"><span><svg class="ic"><use href="#i-users"/></svg>Para compartir</span></label>
+            <label><input type="checkbox" name="a" value="Opciones vegetarianas"><span><svg class="ic"><use href="#i-salad"/></svg>Vegetariano</span></label>
+            <label><input type="checkbox" name="a" value="Postres"><span><svg class="ic"><use href="#i-cake"/></svg>Postres</span></label>
+            <label><input type="checkbox" name="a" value="Bebidas de la casa"><span><svg class="ic"><use href="#i-glass-full"/></svg>Bebidas</span></label>
+            <label><input type="checkbox" name="a" value="Sorpréndanme"><span><svg class="ic"><use href="#i-sparkles"/></svg>Sorpréndanme</span></label>
+          </div>
+        </div>
+        <div class="q"><b>¿Cuántas personas?</b>
+          <div class="range"><output id="po">150</output><input id="p" type="range" min="30" max="2000" step="10" value="150" aria-label="Número de personas"></div>
+        </div>
+        <div class="q row2">
+          <label>Fecha tentativa<input id="d" type="date"></label>
+          <label>Lugar o zona<input id="s"></label>
+        </div>
+      </form>
+      <aside class="ticket rv" aria-live="polite">
+        <img src="mawey_isotipo_ocre.svg" alt="">
+        <h3>Tu pedido</h3>
+        <ul id="sum"></ul>
+        <a class="btn" id="go" href="https://wa.me/525628150696" target="_blank" rel="noopener"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Enviar por WhatsApp</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="band tray" id="trayectoria">
+  <div class="wrap"><p class="kicker">Dónde nos has visto</p><h2>Cocinamos donde <em>pasan las cosas</em></h2></div>
+  <div class="mq big" style="margin-top:44px"><div class="tr" id="t1"></div></div>
+  <div class="mq big rev"><div class="tr" id="t2"></div></div>
+  <div class="wrap"><p class="also">Además: eventos corporativos, activaciones de marca y fiestas privadas.</p></div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 MAWEY · Una marca <a href="index.html">BEHIND</a></span>
+    <span>WhatsApp 56 2815 0696 · <a href="https://www.instagram.com/maweyft/">@maweyft</a></span>
+  </div>
+</footer>
+<a class="float" id="fl" href="#antojo"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Cotiza</a>
+<script>
+{
+  const $ = id => document.getElementById(id);
+  const F = [['m_g1', 'Buñuelos con salsa y germinados'], ['m_g2', 'Croquetas doradas'], ['m_g3', 'Bebida de frutos rojos con flores'], ['m_g4', 'Costras de queso'], ['m_g5', 'Quesadilla con papas'], ['m_tacos', 'Tacos sobre tabla'], ['m_hero', 'Taco al pastor']];
+  const fh = F.map(([f, a]) => `<div class="arch"><img src="${f}.jpg" alt="${a}" loading="lazy"></div>`).join('');
+  $('food').innerHTML = fh + fh;
+  const A = ['Fórmula 1', 'Vive Latino', 'Corona Capital'], B = ['Tecate Pa’l Norte', 'Tecate Comuna', 'Flow Fest'];
+  const fill = (el, arr) => { const h = arr.map(x => `<span>${x}</span>`).join(''); el.innerHTML = h + h + h; };
+  fill($('t1'), A); fill($('t2'), B);
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  const fl = $('fl'), hero = $('inicio'), an = $('antojo');
+  addEventListener('scroll', () => { const h = hero.getBoundingClientRect(), a = an.getBoundingClientRect(); fl.classList.toggle('on', h.bottom < 0 && !(a.top < innerHeight && a.bottom > 0)); }, { passive: true });
+
+  const vb = $('vb'), pp = $('pp');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { vb.removeAttribute('autoplay'); vb.pause(); }
+  const setPP = () => { const z = vb.paused; pp.innerHTML = `<svg class="ic"><use href="#i-player-${z ? 'play' : 'pause'}"/></svg>`; pp.setAttribute('aria-label', z ? 'Reproducir video' : 'Pausar video'); };
+  pp.addEventListener('click', () => { vb.paused ? vb.play().catch(() => {}) : vb.pause(); });
+  vb.addEventListener('play', setPP); vb.addEventListener('pause', setPP); setPP();
+  const p = $('p'), po = $('po'), go = $('go'), sum = $('sum');
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const build = () => {
+    const n = +p.value; po.textContent = n >= 2000 ? '2000+' : n;
+    const t = document.querySelector('input[name=t]:checked').value;
+    const a = [...document.querySelectorAll('input[name=a]:checked')].map(x => x.value);
+    const d = $('d').value, s = $('s').value.trim();
+    const rows = [['Evento', t], ['Personas', po.textContent], ['Antojo', a.length ? a.join(', ') : 'Por definir'], ['Fecha', d || 'Por definir'], ['Lugar', s || 'Por definir']];
+    sum.innerHTML = rows.map(([k, v]) => `<li>${k}<b>${esc(v)}</b></li>`).join('');
+    const msg = ['Hola MAWEY, quiero cotizar el food truck.', ...rows.map(([k, v]) => `${k}: ${v}`)].join('\n');
+    go.href = 'https://wa.me/525628150696?text=' + encodeURIComponent(msg);
+  };
+  $('f').addEventListener('input', build); $('f').addEventListener('change', build);
+  $('f').addEventListener('submit', e => e.preventDefault());
+  build();
+}
+</script>
+</body>
+</html>
