@@ -1,5 +1,6 @@
-// Se ejecuta solo cada vez que llega una solicitud del cotizador (Netlify Forms).
-// Manda: 1) confirmación al cliente con la presentación adjunta, 2) alerta a info@behindmx.mx.
+// Recibe cada solicitud del cotizador (app y web) en /.netlify/functions/cotizar.
+// Manda: 1) confirmación al cliente con la presentación adjunta, 2) alerta a info@behindmx.mx,
+// 3) guarda al cliente en Brevo (Contactos) con SEGMENTO "App BEHIND" o "App MAWEY".
 // Requiere la variable de entorno BREVO_API_KEY en Netlify.
 const SITE = 'https://behindmx.mx';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -13,10 +14,25 @@ async function brevo(body) {
   if (!r.ok) console.log('Brevo error', r.status, await r.text());
 }
 
+async function brevoContact(d, marca) {
+  const r = await fetch('https://api.brevo.com/v3/contacts', {
+    method: 'POST',
+    headers: { 'api-key': process.env.BREVO_API_KEY, 'content-type': 'application/json', accept: 'application/json' },
+    body: JSON.stringify({ email: d.correo, updateEnabled: true,
+      attributes: { NOMBRE: d.nombre || '', APELLIDOS: d.apellido || '', EMPRESA: d.empresa || '', SEGMENTO: `App ${marca}` } })
+  });
+  if (!r.ok) console.log('Brevo contacto', r.status, await r.text());
+}
+
+const json = (code, obj) => ({ statusCode: code, headers: { 'content-type': 'application/json' }, body: JSON.stringify(obj) });
+
 export const handler = async (event) => {
-  const { payload } = JSON.parse(event.body || '{}');
-  if (!payload || payload.form_name !== 'cotizacion' || !process.env.BREVO_API_KEY) return { statusCode: 200 };
-  const d = payload.data || {};
+  if (event.httpMethod !== 'POST') return json(405, { ok: false });
+  const raw = event.isBase64Encoded ? Buffer.from(event.body || '', 'base64').toString() : (event.body || '');
+  const d = (event.headers['content-type'] || '').includes('json') ? JSON.parse(raw || '{}') : Object.fromEntries(new URLSearchParams(raw));
+  if (d['bot-field']) return json(200, { ok: true });
+  if (!d.nombre || !d.correo || !d.whatsapp) return json(400, { ok: false, error: 'faltan datos' });
+  if (!process.env.BREVO_API_KEY) { console.log('Falta BREVO_API_KEY', d); return json(200, { ok: true, correo: false }); }
   const mawey = d.marca === 'MAWEY';
   const marca = mawey ? 'MAWEY' : 'BEHIND';
   const color = mawey ? '#2F3A1F' : '#072E33';
@@ -71,5 +87,6 @@ export const handler = async (event) => {
       <table style="font-size:14px">${tabla}</table>
       <p style="color:#a00">Compromiso: propuesta en menos de 24 horas hábiles.</p></div>`
   });
-  return { statusCode: 200 };
+  if (v(d.correo)) await brevoContact(d, marca);
+  return json(200, { ok: true, correo: true });
 };

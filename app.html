@@ -269,7 +269,10 @@ $('#f').onsubmit=async e=>{e.preventDefault();
  const lines=[`Hola, soy ${d.get('nombre')} ${d.get('apellido')}. Acabo de mandar una solicitud de cotización para ${marca}.`];
  for(const k of ['tipo','fecha','hora_inicio','hora_fin','duracion','invitados','tipo_lugar','lugar','servicios','servicio_otro','presupuesto','mensaje','empresa','correo'])if(d.get(k))lines.push(k+': '+d.get(k));
  $('#wa-ok').href='https://wa.me/525628150696?text='+encodeURIComponent(lines.join('\n'));
- try{if(!DEMO)await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(d).toString()});
+ try{if(!DEMO){const body=new URLSearchParams(d).toString();
+   const r=await fetch('/.netlify/functions/cotizar',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
+   if(!r.ok)throw new Error('envío');
+   fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body}).catch(()=>{});}
   $('#okname').textContent=d.get('nombre').split(' ')[0];$('#web-ok').href=marca==='MAWEY'?'https://behindmx.mx/mawey.html':'https://behindmx.mx';go('s-ok')}
  catch(err){location.href=$('#wa-ok').href}
  finally{btn.disabled=false;btn.textContent='ENVIAR SOLICITUD'}};
