@@ -145,6 +145,11 @@ nav .btn{min-height:42px;padding:0 20px;font-size:15px}
 .brand.soon{border:1px dashed var(--lat);color:var(--pet)}
 .brand.soon img{height:84px;width:auto}
 @media(max-width:700px){.brands{grid-template-columns:1fr}}
+.appcard{background:var(--pet);border:1px solid rgba(228,214,191,.2);border-radius:160px 160px 16px 16px;padding:clamp(48px,6vw,80px) clamp(24px,4vw,48px) 32px;text-align:center;display:grid;gap:14px;justify-items:center}
+.appcard h3{font:500 clamp(34px,4vw,48px)/1.05 'Cormorant Garamond',serif;margin:0;color:var(--hue)}
+.appcard p{margin:0;color:var(--are);max-width:44ch}
+.appcard .dl{display:flex;align-items:center;gap:14px;text-align:left;margin-top:12px;font-size:14px;color:var(--are);max-width:420px}
+.appcard .dl img{width:96px;height:96px;border-radius:10px;flex:none}
 /* cotiza */
 .cot{background:var(--abi);color:var(--hue)}
 .cot .grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,96px)}
@@ -189,7 +194,7 @@ footer img{height:18px;width:auto}
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="#marcas">Nuestras marcas</a></li>
     </ul>
-    <a class="btn" href="#cotiza">Cotiza tu evento</a>
+    <a class="btn" href="app.html">Cotiza tu evento</a>
   </div>
 </nav>
 
@@ -200,7 +205,7 @@ footer img{height:18px;width:auto}
       <h1>El equipo detrás de cada <em>momento</em></h1>
       <p class="lead">Planeamos y operamos eventos corporativos y sociales de principio a fin: gastronomía, bebidas, ambientación y producción técnica con un solo responsable.</p>
       <div class="cta">
-        <a class="btn" href="#cotiza">Cotiza tu evento <svg class="ic"><use href="#i-arrow-right"/></svg></a>
+        <a class="btn" href="app.html">Cotiza tu evento <svg class="ic"><use href="#i-arrow-right"/></svg></a>
       </div>
       <div class="hl">
         <span><svg class="ic"><use href="#i-tools-kitchen-2"/></svg>Banquetes</span>
@@ -211,7 +216,7 @@ footer img{height:18px;width:auto}
     </div>
     <div class="pic rv">
       <div class="arch"><img src="b_hero.jpg" alt="Salón montado con mesas imperiales, centros de pampas y orquesta al fondo"></div>
-      <a class="seal" href="#cotiza" aria-label="Cotiza tu evento">
+      <a class="seal" href="app.html" aria-label="Cotiza tu evento">
         <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs><text font-family="Jost" font-size="9" fill="#05161A"><textPath href="#circ" textLength="236" lengthAdjust="spacing">COTIZA TU EVENTO · COTIZA TU EVENTO ·</textPath></text></svg>
         <svg class="ic"><use href="#i-arrow-up-right"/></svg>
       </a>
@@ -325,7 +330,7 @@ footer img{height:18px;width:auto}
     <div class="rv">
       <p class="kicker">Cotiza tu evento</p>
       <h2>Cuéntanos qué tienes <em>en mente</em></h2>
-      <p class="lead" style="color:var(--are)">Elige el tipo de evento, llena lo que sepas y se abre WhatsApp con tu mensaje listo.</p>
+      <p class="lead" style="color:var(--are)">Usa nuestro cotizador o escríbenos directo. Respondemos en menos de 24 horas hábiles.</p>
       <div class="contact">
         <a href="https://wa.me/525628150696" target="_blank" rel="noopener"><svg class="ic"><use href="#i-brand-whatsapp"/></svg><span>WhatsApp <b>56 2815 0696</b></span></a>
         <a href="mailto:info@behindmx.mx"><svg class="ic"><use href="#i-mail"/></svg><span><b>info@behindmx.mx</b></span></a>
@@ -333,22 +338,13 @@ footer img{height:18px;width:auto}
         <div><svg class="ic"><use href="#i-map-pin"/></svg><span>Ciudad de México</span></div>
       </div>
     </div>
-    <form id="f" class="rv">
-      <div class="types" role="radiogroup" aria-label="Tipo de evento">
-        <label><input type="radio" name="t" value="Corporativo" checked><span><svg class="ic"><use href="#i-briefcase"/></svg>Corporativo</span></label>
-        <label><input type="radio" name="t" value="Social"><span><svg class="ic"><use href="#i-confetti"/></svg>Social</span></label>
-        <label><input type="radio" name="t" value="Activación de marca"><span><svg class="ic"><use href="#i-speakerphone"/></svg>Activación</span></label>
-        <label><input type="radio" name="t" value="Food truck MAWEY"><span><svg class="ic"><use href="#i-truck"/></svg>Food truck</span></label>
-        <label><input type="radio" name="t" value="Otro"><span><svg class="ic"><use href="#i-dots"/></svg>Otro</span></label>
-      </div>
-      <label class="f">Nombre<input id="n" autocomplete="name"></label>
-      <label class="f">Empresa (opcional)<input id="e" autocomplete="organization"></label>
-      <label class="f">Fecha tentativa<input id="d" type="date"></label>
-      <label class="f">Número de invitados<input id="i" type="number" min="1" inputmode="numeric"></label>
-      <label class="f full">Sede o zona<input id="s"></label>
-      <label class="f full">Cuéntanos más<textarea id="m"></textarea></label>
-      <a class="btn send" id="go" href="https://wa.me/525628150696" target="_blank" rel="noopener"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Enviar por WhatsApp</a>
-    </form>
+    <div class="appcard rv">
+      <p class="kicker" style="color:var(--lat)">Cotizador BEHIND</p>
+      <h3>Cotiza en 2 minutos</h3>
+      <p>Cuéntanos tipo de evento, fecha, lugar y lo que imaginas. Te llega la confirmación al momento y tu propuesta en menos de 24 horas hábiles.</p>
+      <a class="btn send" href="app.html">Empezar cotización <svg class="ic"><use href="#i-arrow-right"/></svg></a>
+      <div class="dl"><img src="app_qr.png" alt="Código QR de la app de BEHIND"><span><b>Llévala en tu celular.</b> Escanea el código y, en iPhone, toca Compartir → "Agregar a inicio".</span></div>
+    </div>
   </div>
 </section>
 
@@ -359,7 +355,7 @@ footer img{height:18px;width:auto}
     <span>56 2815 0696 · info@behindmx.mx · @behind_cdmx</span>
   </div>
 </footer>
-<a class="float" id="fl" href="#cotiza"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Cotiza</a>
+<a class="float" id="fl" href="app.html"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Cotiza</a>
 <script>
 {
   const $ = id => document.getElementById(id);
@@ -402,19 +398,6 @@ footer img{height:18px;width:auto}
   fio.observe(hero); fio.observe(cot);
   addEventListener('scroll', () => { const hr = hero.getBoundingClientRect(), cr = cot.getBoundingClientRect(); fl.classList.toggle('on', hr.bottom < 0 && !(cr.top < innerHeight && cr.bottom > 0)); }, { passive: true });
 
-  // cotizador
-  const go = $('go');
-  const build = () => {
-    const v = k => $(k).value.trim();
-    const t = document.querySelector('input[name=t]:checked').value;
-    const lines = ['Hola BEHIND, quiero cotizar un evento.', 'Tipo: ' + t,
-      v('n') && 'Nombre: ' + v('n'), v('e') && 'Empresa: ' + v('e'), v('d') && 'Fecha: ' + v('d'),
-      v('i') && 'Invitados: ' + v('i'), v('s') && 'Sede: ' + v('s'), v('m')].filter(Boolean);
-    go.href = 'https://wa.me/525628150696?text=' + encodeURIComponent(lines.join('\n'));
-  };
-  $('f').addEventListener('input', build); $('f').addEventListener('change', build);
-  $('f').addEventListener('submit', e => e.preventDefault());
-  build();
 }
 </script>
 </body>

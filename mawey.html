@@ -123,6 +123,9 @@ input[type=range]{flex:1;accent-color:var(--ol);height:44px}
 footer{background:#1f2714;color:var(--va);font-size:14px;padding:32px 0 96px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.mq .tr,.seal svg.ring{animation:none}}
+.mcard{max-width:640px;margin:28px auto 0;background:#F7E7CE;color:#2F3A1F;border-radius:160px 160px 16px 16px;padding:56px clamp(22px,4vw,44px) 30px;text-align:center;display:grid;gap:14px;justify-items:center}
+.mcard>img{height:56px}.mcard h3{font:600 clamp(28px,4vw,40px)/1.1 Fraunces,serif;margin:0}.mcard p{margin:0;max-width:44ch}
+.mcard .dl{display:flex;align-items:center;gap:14px;text-align:left;font-size:14px;max-width:420px;margin-top:8px}.mcard .dl img{width:92px;height:92px;border-radius:10px;flex:none}
 </style>
 </head>
 <body>
@@ -193,42 +196,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   <div class="wrap">
     <p class="kicker rv">Arma tu evento</p>
     <h2 class="rv">Cuéntanos qué buscas y <em>te damos opciones</em></h2>
-    <div class="bd">
-      <form id="f" class="rv">
-        <div class="q"><b>¿Qué tipo de evento es?</b>
-          <div class="chips" role="radiogroup" aria-label="Tipo de evento">
-            <label><input type="radio" name="t" value="Festival" checked><span><svg class="ic"><use href="#i-tent"/></svg>Festival</span></label>
-            <label><input type="radio" name="t" value="Corporativo"><span><svg class="ic"><use href="#i-briefcase"/></svg>Corporativo</span></label>
-            <label><input type="radio" name="t" value="Fiesta privada"><span><svg class="ic"><use href="#i-confetti"/></svg>Fiesta privada</span></label>
-            <label><input type="radio" name="t" value="Boda"><span><svg class="ic"><use href="#i-heart"/></svg>Boda</span></label>
-            <label><input type="radio" name="t" value="Activación de marca"><span><svg class="ic"><use href="#i-speakerphone"/></svg>Activación</span></label>
-          </div>
-        </div>
-        <div class="q"><b>¿Qué se te antoja? <small style="font:300 15px Jost">(elige varios)</small></b>
-          <div class="chips">
-            <label><input type="checkbox" name="a" value="Tacos"><span><svg class="ic"><use href="#i-tools-kitchen-2"/></svg>Tacos</span></label>
-            <label><input type="checkbox" name="a" value="Entre panes"><span><svg class="ic"><use href="#i-chef-hat"/></svg>Entre panes</span></label>
-            <label><input type="checkbox" name="a" value="Para compartir"><span><svg class="ic"><use href="#i-users"/></svg>Para compartir</span></label>
-            <label><input type="checkbox" name="a" value="Opciones vegetarianas"><span><svg class="ic"><use href="#i-salad"/></svg>Vegetariano</span></label>
-            <label><input type="checkbox" name="a" value="Postres"><span><svg class="ic"><use href="#i-cake"/></svg>Postres</span></label>
-            <label><input type="checkbox" name="a" value="Bebidas de la casa"><span><svg class="ic"><use href="#i-glass-full"/></svg>Bebidas</span></label>
-            <label><input type="checkbox" name="a" value="Sorpréndanme"><span><svg class="ic"><use href="#i-sparkles"/></svg>Sorpréndanme</span></label>
-          </div>
-        </div>
-        <div class="q"><b>¿Cuántas personas?</b>
-          <div class="range"><output id="po">150</output><input id="p" type="range" min="30" max="2000" step="10" value="150" aria-label="Número de personas"></div>
-        </div>
-        <div class="q row2">
-          <label>Fecha tentativa<input id="d" type="date"></label>
-          <label>Lugar o zona<input id="s"></label>
-        </div>
-      </form>
-      <aside class="ticket rv" aria-live="polite">
-        <img src="mawey_isotipo_ocre.svg" alt="">
-        <h3>Tu pedido</h3>
-        <ul id="sum"></ul>
-        <a class="btn" id="go" href="https://wa.me/525628150696" target="_blank" rel="noopener"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Enviar por WhatsApp</a>
-      </aside>
+    <div class="mcard rv">
+      <img src="mawey_isotipo_ocre.svg" alt="">
+      <h3>Lleva el truck a tu evento</h3>
+      <p>Elige tipo de evento, fecha, lugar y qué se te antoja. Te llega la confirmación al momento y tu propuesta en menos de 24 horas hábiles.</p>
+      <a class="btn" href="app.html?marca=mawey">Cotizar ahora <svg class="ic"><use href="#i-arrow-right"/></svg></a>
+      <div class="dl"><img src="app_qr.png" alt="Código QR de la app"><span><b>Llévala en tu celular.</b> Escanea el código y, en iPhone, toca Compartir → "Agregar a inicio".</span></div>
     </div>
   </div>
 </section>
@@ -246,7 +219,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <span>WhatsApp 56 2815 0696 · <a href="https://www.instagram.com/maweyft/">@maweyft</a></span>
   </div>
 </footer>
-<a class="float" id="fl" href="#antojo"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Cotiza</a>
+<a class="float" id="fl" href="app.html?marca=mawey"><svg class="ic"><use href="#i-brand-whatsapp"/></svg>Cotiza</a>
 <script>
 {
   const $ = id => document.getElementById(id);
@@ -268,21 +241,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
   const setPP = () => { const z = vb.paused; pp.innerHTML = `<svg class="ic"><use href="#i-player-${z ? 'play' : 'pause'}"/></svg>`; pp.setAttribute('aria-label', z ? 'Reproducir video' : 'Pausar video'); };
   pp.addEventListener('click', () => { vb.paused ? vb.play().catch(() => {}) : vb.pause(); });
   vb.addEventListener('play', setPP); vb.addEventListener('pause', setPP); setPP();
-  const p = $('p'), po = $('po'), go = $('go'), sum = $('sum');
-  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const build = () => {
-    const n = +p.value; po.textContent = n >= 2000 ? '2000+' : n;
-    const t = document.querySelector('input[name=t]:checked').value;
-    const a = [...document.querySelectorAll('input[name=a]:checked')].map(x => x.value);
-    const d = $('d').value, s = $('s').value.trim();
-    const rows = [['Evento', t], ['Personas', po.textContent], ['Antojo', a.length ? a.join(', ') : 'Por definir'], ['Fecha', d || 'Por definir'], ['Lugar', s || 'Por definir']];
-    sum.innerHTML = rows.map(([k, v]) => `<li>${k}<b>${esc(v)}</b></li>`).join('');
-    const msg = ['Hola MAWEY, quiero cotizar el food truck.', ...rows.map(([k, v]) => `${k}: ${v}`)].join('\n');
-    go.href = 'https://wa.me/525628150696?text=' + encodeURIComponent(msg);
-  };
-  $('f').addEventListener('input', build); $('f').addEventListener('change', build);
-  $('f').addEventListener('submit', e => e.preventDefault());
-  build();
 }
 </script>
 </body>

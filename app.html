@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BEHIND · Cotiza tu evento</title>
+<meta name="description" content="Cotiza tu evento con BEHIND o lleva el food truck MAWEY.">
+<meta name="theme-color" content="#072E33">
+<link rel="manifest" href="app.webmanifest">
+<link rel="apple-touch-icon" href="app_icon_180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BEHIND">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Fraunces:wght@600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--pet:#072E33;--lat:#B8925A;--are:#E4D6BF;--hue:#F6F1E8;--ink:#2B2420;--ol:#2F3A1F;--oc:#B8860B;--ch:#F7E7CE;
+--bg:var(--pet);--ac:var(--lat);--soft:var(--hue)}
+body.mawey{--bg:var(--ol);--ac:var(--oc);--soft:var(--ch)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--soft);font-family:Jost,Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;transition:background .3s}
+.wrap{max-width:520px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:calc(80px + env(safe-area-inset-bottom))}
+.serif{font-family:'Cormorant Garamond',serif;font-weight:500}
+body.mawey .serif{font-family:Fraunces,serif;font-weight:600}
+.scr{display:none;animation:in .3s}.scr.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+/* home */
+.hero{position:relative;height:62vh;min-height:430px;background:var(--bg) center/cover no-repeat;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:calc(18px + env(safe-area-inset-top)) 22px 26px}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.05) 40%,rgba(0,0,0,.65))}
+.hero>*{position:relative}
+.top{display:flex;align-items:center;justify-content:space-between}
+.logo{height:22px}
+.sw{display:flex;background:rgba(0,0,0,.3);backdrop-filter:blur(6px);border-radius:30px;padding:3px}
+.sw button{border:0;background:none;color:#fff;font:500 12px Jost;letter-spacing:2px;padding:8px 14px;border-radius:30px;cursor:pointer}
+.sw button.on{background:var(--ac)}
+.hero h1{font-size:40px;line-height:1.05}
+.hero p{font-weight:300;opacity:.9;margin-top:8px}
+.menu{padding:20px;display:grid;gap:12px}
+.big{display:flex;align-items:center;gap:14px;background:#fff;border-radius:16px;padding:18px;border:0;width:100%;text-align:left;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.05);font:inherit;color:inherit;text-decoration:none}
+.big.pri{background:var(--bg);color:#fff}
+.big .ic{width:44px;height:44px;border-radius:12px;background:var(--soft);display:grid;place-items:center;flex:none}
+.big.pri .ic{background:rgba(255,255,255,.12)}
+.big b{display:block;font-weight:500;font-size:16px}.big span{font-size:13px;opacity:.75}
+svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
+/* steps */
+.bar{position:sticky;top:0;z-index:5;background:var(--soft);padding:calc(14px + env(safe-area-inset-top)) 20px 12px}
+.bar .row{display:flex;align-items:center;gap:12px}
+.back{border:0;background:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.prog{flex:1;height:5px;background:var(--are);border-radius:5px;overflow:hidden}.prog i{display:block;height:100%;background:var(--bg);transition:width .3s}
+.stepn{font-size:12px;letter-spacing:1.5px;color:#8a7f76}
+.body{padding:6px 20px 20px}
+h2{font-size:32px;line-height:1.1;color:var(--bg);margin:8px 0 6px}
+.sub{color:#7a6f66;font-size:15px;margin-bottom:18px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:#fff;border:1.5px solid transparent;border-radius:14px;padding:16px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.opt .e{font-size:24px;display:block;margin-bottom:6px}.opt b{font-weight:500;display:block}.opt small{display:block;font-size:12px;color:#8a7f76;margin-top:3px;line-height:1.3}
+.opt:last-child:nth-child(odd){grid-column:1/-1}.opt.on{border-color:var(--bg);background:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--are);background:#fff;border-radius:30px;padding:10px 14px;font:400 14px Jost;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--bg);color:#fff;border-color:var(--bg)}
+label{display:block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#7a6f66;margin:16px 0 7px}
+input,select,textarea{width:100%;border:1px solid var(--are);border-radius:12px;padding:14px 12px;font:400 16px Jost;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--ac);border-color:transparent}
+textarea{min-height:110px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stepper{display:flex;align-items:center;background:#fff;border:1px solid var(--are);border-radius:12px;overflow:hidden}
+.stepper button{border:0;background:none;width:48px;height:50px;font-size:22px;cursor:pointer;color:var(--bg)}
+.stepper input{border:0;text-align:center;padding:0;font-size:18px}
+.cta{position:fixed;left:0;right:0;bottom:0;padding:12px 20px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--soft) 30%)}
+.cta .in{max-width:480px;margin:0 auto}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:14px;padding:17px;font:500 15px Jost;letter-spacing:1.5px;cursor:pointer;text-decoration:none;background:var(--bg);color:#fff}
+.btn:disabled{opacity:.35}
+.btn.sec{background:#fff;color:var(--bg);border:1px solid var(--bg);margin-top:10px}
+.btn.wa{background:#1f7a4d}
+.link{display:block;text-align:center;margin-top:12px;color:#8a7f76;font-size:13px;background:none;border:0;width:100%;cursor:pointer;text-decoration:underline}
+/* follow */
+.igc{background:#fff;border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:12px;box-shadow:0 1px 8px rgba(0,0,0,.04)}
+.igc .av{width:54px;height:54px;border-radius:50%;flex:none;display:grid;place-items:center;padding:8px}
+.igc .av img{width:100%}
+.igc .t{flex:1}.igc .t b{display:block;font-weight:500}.igc .t span{font-size:13px;color:#8a7f76}
+.fb{border:0;border-radius:10px;padding:10px 16px;font:500 13px Jost;cursor:pointer;background:var(--bg);color:#fff;text-decoration:none}
+.fb.done{background:var(--are);color:var(--ink)}
+.perk{background:var(--bg);color:#fff;border-radius:16px;padding:16px;margin-top:6px;font-size:14px;line-height:1.4}
+.perk b{color:var(--are)}
+.sum{background:#fff;border-radius:16px;padding:16px;font-size:14px;line-height:1.7;margin-top:14px}
+.sum b{font-weight:500}
+.ok{text-align:center;padding-top:40px}
+.ok .chk{width:76px;height:76px;border-radius:50%;background:var(--bg);color:#fff;display:grid;place-items:center;margin:0 auto 16px}
+.hp{position:absolute;left:-9999px}
+.share img{width:190px;display:block;margin:10px auto;border-radius:12px}
+.demo{position:fixed;top:calc(8px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);background:#c0392b;color:#fff;font:500 11px Jost;letter-spacing:1px;padding:4px 10px;border-radius:20px;z-index:20;display:none}
+</style>
+</head>
+<body>
+<div class="demo" id="demo">DEMO · no se envía nada</div>
+<div class="wrap">
+
+<!-- 0 INICIO -->
+<section class="scr on" id="s-home">
+  <div class="hero" id="hero">
+    <div class="top"><img class="logo" id="logo" alt="logo"><div class="sw"><button class="on" data-b="BEHIND">BEHIND</button><button data-b="MAWEY">MAWEY</button></div></div>
+    <div><h1 class="serif" id="h1"></h1><p id="lead"></p></div>
+  </div>
+  <div class="menu">
+    <button class="big pri" onclick="start('cotizar')"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg></div><div><b>Cotiza con nosotros</b><span>Te toma solo 2 minutos</span></div></button>
+    
+    <a class="big" id="wa-home" target="_blank" rel="noopener"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 21l1.65-3.8A9 9 0 1 1 7.8 19.6L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg></div><div><b>Hablar con un ejecutivo</b><span>Por WhatsApp · 56 2815 0696</span></div></a>
+    <button class="big" onclick="go('s-share')"><div class="ic"><svg class="i" viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.7 10.7l6.6-3.4M8.7 13.3l6.6 3.4"/></svg></div><div><b>Compartir</b><span>Manda la app a quien organiza un evento</span></div></button>
+  </div>
+</section>
+
+<form name="cotizacion" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="f">
+<input type="hidden" name="form-name" value="cotizacion">
+<input type="hidden" name="marca" id="marca" value="BEHIND">
+<input type="hidden" name="tipo" id="tipo">
+<input type="hidden" name="servicios" id="servicios">
+<p class="hp"><label>No llenar <input name="bot-field"></label></p>
+
+<!-- 2 TIPO -->
+<section class="scr" id="s-tipo">
+  <div class="bar"><div class="row"><button type="button" class="back" onclick="prev()">‹</button><div class="prog"><i style="width:25%"></i></div><span class="stepn">1/4</span></div></div>
+  <div class="body"><h2 class="serif">¿Qué vamos a celebrar?</h2><p class="sub">Elige el que más se parezca.</p><div class="opts" id="tipos"></div></div>
+  <div class="cta"><div class="in"><button type="button" class="btn" id="b-tipo" disabled onclick="next()">SIGUIENTE</button></div></div>
+</section>
+
+<!-- 3 CUÁNDO -->
+<section class="scr" id="s-cuando">
+  <div class="bar"><div class="row"><button type="button" class="back" onclick="prev()">‹</button><div class="prog"><i style="width:46%"></i></div><span class="stepn">2/4</span></div></div>
+  <div class="body"><h2 class="serif">¿Cuándo y dónde?</h2><p class="sub">Con esto revisamos disponibilidad y costos de la sede.</p>
+    <label>Fecha *</label><input type="date" name="fecha" id="fecha">
+    <div class="two"><div><label>Hora inicio *</label><input type="time" name="hora_inicio" id="hora"></div><div><label>Hora fin *</label><input type="time" name="hora_fin" id="horafin"></div></div>
+    <input type="hidden" name="duracion" id="duracion"><p class="sub" id="dur" style="margin:8px 0 0;font-size:14px"></p>
+    <label>Invitados *</label><div class="stepper"><button type="button" onclick="stepPax(-5)" aria-label="Menos">−</button><input type="number" name="invitados" id="pax" value="50" min="1" inputmode="numeric"><button type="button" onclick="stepPax(5)" aria-label="Más">+</button></div>
+    <label>¿Qué tipo de lugar te gustaría cotizar? * <span style="text-transform:none;letter-spacing:0">(elige hasta 2)</span></label><div class="chips" id="lugares"></div><input type="hidden" name="tipo_lugar" id="tipo_lugar">
+    <input id="lugar_otro" name="lugar_otro" placeholder="¿Qué tipo de lugar?" style="display:none;margin-top:10px">
+    <label>¿Tienes un lugar en mente? *</label><input name="lugar" id="lugar" placeholder="Dinos cuál o la zona donde te gustaría (ej. Polanco, Santa Fe)">
+  </div>
+  <div class="cta"><div class="in"><button type="button" class="btn" id="b-cuando" disabled onclick="next()">SIGUIENTE</button></div></div>
+</section>
+
+<!-- 4 CUÉNTANOS MÁS -->
+<section class="scr" id="s-mas">
+  <div class="bar"><div class="row"><button type="button" class="back" onclick="prev()">‹</button><div class="prog"><i style="width:66%"></i></div><span class="stepn">3/4</span></div></div>
+  <div class="body"><h2 class="serif">Cuéntanos más</h2><p class="sub">Entre más nos cuentes, más exacta la propuesta.</p>
+    <label>¿Qué te gustaría incluir? *</label><div class="chips" id="servs"></div>
+    <input id="serv_otro" name="servicio_otro" placeholder="¿Qué más necesitas?" style="display:none;margin-top:10px">
+    <label>Presupuesto aproximado *</label><div class="chips" id="pres"></div><input type="hidden" name="presupuesto" id="presupuesto">
+    <label>¿Qué tienes en mente?</label><textarea name="mensaje" id="mensaje" placeholder="Estilo, ambiente, comida que te encanta, algo que no puede faltar…"></textarea>
+  </div>
+  <div class="cta"><div class="in"><button type="button" class="btn" id="b-mas" disabled onclick="next()">SIGUIENTE</button></div></div>
+</section>
+
+<!-- 5 DATOS -->
+<section class="scr" id="s-datos">
+  <div class="bar"><div class="row"><button type="button" class="back" onclick="prev()">‹</button><div class="prog"><i style="width:88%"></i></div><span class="stepn">4/4</span></div></div>
+  <div class="body"><h2 class="serif">¿A quién le mandamos la propuesta?</h2><p class="sub">Para mandarte una propuesta formal.</p>
+    <div class="two"><div><label>Nombre *</label><input name="nombre" id="nombre" autocomplete="given-name"></div><div><label>Apellido *</label><input name="apellido" id="apellido" autocomplete="family-name"></div></div>
+    <label>Empresa *</label><input name="empresa" id="empresa" autocomplete="organization" placeholder="Si es evento personal, escribe Particular">
+    <label>WhatsApp *</label><input name="whatsapp" id="wa" type="tel" autocomplete="tel" inputmode="tel" placeholder="10 dígitos">
+    <label>Correo *</label><input name="correo" id="correo" type="email" autocomplete="email">
+    <p class="sub" style="margin-top:12px;font-size:13px">📩 Te enviaremos la propuesta por <b>WhatsApp y correo</b> en menos de 24 horas hábiles.</p>
+    <div class="sum" id="sum"></div>
+  </div>
+  <div class="cta"><div class="in"><button type="submit" class="btn" id="b-send">ENVIAR SOLICITUD</button></div></div>
+</section>
+</form>
+
+<form name="seguidores" data-netlify="true" hidden><input name="cuenta"><input name="marca"><input name="origen"><input name="nombre"></form>
+
+<!-- 6 GRACIAS -->
+<section class="scr" id="s-ok"><div class="body ok">
+  <div class="chk"><svg class="i" viewBox="0 0 24 24" style="width:36px;height:36px"><path d="M5 12l5 5L20 7"/></svg></div>
+  <h2 class="serif">¡Listo, <span id="okname"></span>!</h2>
+  <p class="sub">Ya estamos trabajando en ella. Te llegará una confirmación por correo y WhatsApp con nuestra presentación, y en menos de 24 horas hábiles recibes tu propuesta.</p>
+  <div style="text-align:left;margin-top:26px">
+    <p class="serif" style="font-size:24px;color:var(--bg);margin-bottom:4px" id="comu"></p>
+    <p class="sub" id="perk" style="margin-bottom:12px"></p>
+    <div class="igc"><div class="av" style="background:#072E33"><img id="av-b" alt=""></div><div class="t"><b>@behind_cdmx</b><span>Eventos, banquetes y producción</span></div><a class="fb" data-ig="behind_cdmx" target="_blank" rel="noopener">Seguir</a></div>
+    <div class="igc"><div class="av" style="background:#2F3A1F"><img id="av-m" alt=""></div><div class="t"><b>@maweyft</b><span>Food truck · raíz mexicana</span></div><a class="fb" data-ig="maweyft" target="_blank" rel="noopener">Seguir</a></div>
+  </div>
+  <a class="btn sec" id="web-ok" target="_blank" rel="noopener" style="margin-bottom:10px">VISITAR NUESTRA PÁGINA WEB</a>
+  <a class="btn wa" id="wa-ok" target="_blank" rel="noopener">CONFIRMAR POR WHATSAPP</a>
+  <button class="btn sec" onclick="go('s-share')">COMPARTIR CON ALGUIEN</button>
+  <button class="link" onclick="reset()">Volver al inicio</button>
+</div></section>
+
+<!-- 7 COMPARTIR -->
+<section class="scr" id="s-share">
+  <div class="bar"><div class="row"><button class="back" onclick="go('s-home')">‹</button></div></div>
+  <div class="body share" style="text-align:center">
+    <h2 class="serif">Compártenos</h2><p class="sub">Escanea o manda el enlace a quien esté organizando un evento.</p>
+    <img id="qr" alt="Código QR">
+    <button class="btn" id="sh">COMPARTIR APP</button>
+    <button class="btn sec" id="sh-web">COMPARTIR SITIO WEB</button>
+    
+  </div>
+</section>
+</div>
+
+<script>
+const ASSETS={blogo:'behind_logo_blanco.svg',mlogo:'mawey_horizontal_principal_fondo_oscuro.svg',bhero:'b_hero.jpg',mhero:'m_hero.jpg',mono:'behind_monograma_laton.svg',miso:'mawey_isotipo_ocre.svg',qr:'app_qr.png'};
+const T={BEHIND:{h:'Detrás de cada evento',l:'Corporativos, sociales, banquetes y producción en CDMX.',logo:ASSETS.blogo,hero:ASSETS.bhero,
+ tipos:[['🏢','Corporativo','Congreso, lanzamiento de marca, conferencia, reunión, kick-off'],['🥂','Social','Cumpleaños, boda, bautizo, aniversario'],['🎄','Posada / fin de año','Oficina, salón o terraza'],['🍽️','Banquete','Coffee break, box lunch, desayuno, comida, cena'],['🍸','Barra y mixología','Barra libre, coctelería de autor'],['🎛️','Producción y hospitality','Audio, video, iluminación, escenografía y todo el look & feel'],['✨','Otro','Cuéntanos en el siguiente paso']],
+ servs:['Comida','Barra / mixología','Mobiliario','Decoración y flores','Audio e iluminación','Meseros y staff','Otro'],
+ comu:'Únete a la comunidad BEHIND',perk:'Ideas, montajes y fechas disponibles antes que nadie.'},
+MAWEY:{h:'Lleva el truck a tu evento',l:'Raíz mexicana. Sabores del mundo.',logo:ASSETS.mlogo,hero:ASSETS.mhero,
+ tipos:[['🎪','Festival','Concierto, carrera, feria'],['🏢','Corporativo','Comida o fiesta de empresa'],['💍','Boda','Tornaboda o cena'],['🎉','Fiesta privada','Cumpleaños, reunión'],['🎄','Posada','Fin de año'],['✨','Otro','Cuéntanos en el siguiente paso']],
+ servs:['Tacos','Burritos','Smoked','Bebidas','Mesas y sillas','Otro'],
+ comu:'Únete a la familia MAWEY',perk:'Entérate dónde va a estar el truck y qué hay nuevo en el menú.'}};
+const PRES=['Menos de $30k','$30k–$80k','$80k–$200k','$200k–$500k','Más de $500k'];
+const LUG=['Oficina','Salón','Jardín','Hotel','Hacienda','Terraza / roof','Estacionamiento','Casa','Otro'];
+let marca=new URLSearchParams(location.search).get('marca')==='mawey'?'MAWEY':'BEHIND',flow=[],idx=0,mode='cotizar';
+const DEMO=!/behindmx\.mx$/.test(location.hostname);if(DEMO)document.getElementById('demo').style.display='block';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$('#av-b').src=ASSETS.mono;$('#av-m').src=ASSETS.miso;$('#qr').src=ASSETS.qr;
+$('#wa-home').href='https://wa.me/525628150696?text='+encodeURIComponent('Hola, me gustaría hablar con un ejecutivo de '+marca+'.');
+function go(id){$$('.scr').forEach(s=>s.classList.toggle('on',s.id===id));scrollTo(0,0)}
+function setMarca(m){marca=m;document.body.classList.toggle('mawey',m==='MAWEY');$('#marca').value=m;
+ $$('.sw button').forEach(b=>b.classList.toggle('on',b.dataset.b===m));
+ $('#wa-home').href='https://wa.me/525628150696?text='+encodeURIComponent('Hola, me gustaría hablar con un ejecutivo de '+m+'.');$('#h1').textContent=T[m].h;$('#lead').textContent=T[m].l;$('#logo').src=T[m].logo;$('#hero').style.backgroundImage=`url('${T[m].hero}')`;
+ $('#perk').textContent=T[m].perk;$('#comu').textContent=T[m].comu;
+ $('#tipos').innerHTML=T[m].tipos.map(([e,t,d])=>`<button type="button" class="opt" data-v="${t}"><span class="e">${e}</span><b>${t}</b><small>${d}</small></button>`).join('');
+ $$('#tipos .opt').forEach(o=>o.onclick=()=>{$$('#tipos .opt').forEach(x=>x.classList.remove('on'));o.classList.add('on');$('#tipo').value=o.dataset.v;$('#b-tipo').disabled=false});
+ $('#servs').innerHTML=T[m].servs.map(t=>`<button type="button" class="chip">${t}</button>`).join('');
+ $$('#servs .chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');$('#servicios').value=$$('#servs .chip.on').map(x=>x.textContent).join(', ');$('#serv_otro').style.display=$('#servicios').value.includes('Otro')?'block':'none';chkMas()});
+ $('#b-tipo').disabled=true;$('#tipo').value='';$('#servicios').value='';if($('#b-mas'))chkMas();if($('#serv_otro'))$('#serv_otro').style.display='none';
+ document.querySelector('meta[name=theme-color]').content=m==='MAWEY'?'#2F3A1F':'#072E33';}
+$('#pres').innerHTML=PRES.map(t=>`<button type="button" class="chip">${t}</button>`).join('');
+$$('#pres .chip').forEach(c=>c.onclick=()=>{$$('#pres .chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');$('#presupuesto').value=c.textContent;chkMas()});
+$('#lugares').innerHTML=LUG.map(t=>`<button type="button" class="chip">${t}</button>`).join('');
+$$('#lugares .chip').forEach(c=>c.onclick=()=>{const on=$$('#lugares .chip.on');
+ if(!c.classList.contains('on')&&on.length>=2){on[0].classList.remove('on')}
+ c.classList.toggle('on');const v=$$('#lugares .chip.on').map(x=>x.textContent);$('#tipo_lugar').value=v.join(', ');$('#lugar_otro').style.display=v.includes('Otro')?'block':'none';chkCuando()});
+$('#fecha').min=new Date().toISOString().slice(0,10);
+['#fecha','#hora','#horafin','#pax','#lugar','#lugar_otro'].forEach(q=>$(q).addEventListener('input',chkCuando));
+$$('.sw button').forEach(b=>b.onclick=()=>setMarca(b.dataset.b));
+$$('.fb').forEach(a=>{a.href='https://instagram.com/'+a.dataset.ig;a.addEventListener('click',()=>{if(a.classList.contains('done'))return;a.textContent='Siguiendo';a.classList.add('done');
+ const body=new URLSearchParams({'form-name':'seguidores',cuenta:'@'+a.dataset.ig,marca,origen:'app · gracias',nombre:$('#okname').textContent||''}).toString();
+ if(!DEMO)fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body}).catch(()=>{});})});
+function start(m){flow=['s-tipo','s-cuando','s-mas','s-datos'];idx=0;go(flow[0])}
+function next(){if(flow[idx+1]==='s-datos')summary();idx++;go(flow[idx])}
+function prev(){idx--;idx<0?go('s-home'):go(flow[idx])}
+function calcDur(){const a=$('#hora').value,b=$('#horafin').value;if(!a||!b){$('#dur').textContent='';$('#duracion').value='';return}
+ let m=(+b.slice(0,2)*60+ +b.slice(3))-(+a.slice(0,2)*60+ +a.slice(3));if(m<=0)m+=1440;const h=Math.floor(m/60),mm=m%60;
+ const t=h+(h===1?' hora':' horas')+(mm?' '+mm+' min':'');$('#duracion').value=t;$('#dur').textContent='Duración: '+t}
+function chkCuando(){calcDur();$('#b-cuando').disabled=!($('#fecha').value&&$('#hora').value&&$('#horafin').value&&+$('#pax').value>0&&$('#tipo_lugar').value&&$('#lugar').value.trim())}
+function chkMas(){$('#b-mas').disabled=!($('#servicios').value&&$('#presupuesto').value)}
+function stepPax(n){const p=$('#pax');p.value=Math.max(1,(+p.value||0)+n);chkCuando()}
+function summary(){const d=new FormData($('#f'));const r=[['Marca',marca],['Evento',d.get('tipo')],['Fecha',d.get('fecha')],['Hora',[d.get('hora_inicio')+(d.get('hora_fin')?'–'+d.get('hora_fin'):''),d.get('duracion')].filter(Boolean).join(' · ')],['Invitados',d.get('invitados')],['Lugar',[(d.get('tipo_lugar')||'').replace('Otro',d.get('lugar_otro')||'Otro'),d.get('lugar')].filter(Boolean).join(' · ')],['Incluir',d.get('servicios')],['Presupuesto',d.get('presupuesto')]].filter(x=>x[1]);
+ const e=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));$('#sum').innerHTML='<b>Tu solicitud</b><br>'+r.map(([k,v])=>`${k}: ${e(v)}`).join('<br>')}
+$('#f').onsubmit=async e=>{e.preventDefault();
+ if(!$('#nombre').value.trim()||!$('#apellido').value.trim()||!$('#empresa').value.trim()||$('#wa').value.replace(/\D/g,'').length<10||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($('#correo').value)){alertless('Completa todos los campos: WhatsApp a 10 dígitos y un correo válido');return}
+ const d=new FormData($('#f'));const btn=$('#b-send');btn.disabled=true;btn.textContent='ENVIANDO…';
+ const lines=[`Hola, soy ${d.get('nombre')} ${d.get('apellido')}. Acabo de mandar una solicitud de cotización para ${marca}.`];
+ for(const k of ['tipo','fecha','hora_inicio','hora_fin','duracion','invitados','tipo_lugar','lugar','servicios','servicio_otro','presupuesto','mensaje','empresa','correo'])if(d.get(k))lines.push(k+': '+d.get(k));
+ $('#wa-ok').href='https://wa.me/525628150696?text='+encodeURIComponent(lines.join('\n'));
+ try{if(!DEMO)await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(d).toString()});
+  $('#okname').textContent=d.get('nombre').split(' ')[0];$('#web-ok').href=marca==='MAWEY'?'https://behindmx.mx/mawey.html':'https://behindmx.mx';go('s-ok')}
+ catch(err){location.href=$('#wa-ok').href}
+ finally{btn.disabled=false;btn.textContent='ENVIAR SOLICITUD'}};
+function reset(){$('#f').reset();$$('.chip.on,.opt.on').forEach(x=>x.classList.remove('on'));setMarca(marca);go('s-home')}
+function share(url,title){if(navigator.share)navigator.share({title,url}).catch(()=>{});else{navigator.clipboard&&navigator.clipboard.writeText(url);alertless('Enlace copiado')}}
+function alertless(t){const n=document.createElement('div');n.textContent=t;n.style.cssText='position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:20px;font:14px Jost;z-index:30';document.body.appendChild(n);setTimeout(()=>n.remove(),2200)}
+$('#sh').onclick=()=>share('https://behindmx.mx/app.html'+(marca==='MAWEY'?'?marca=mawey':''),'BEHIND · Cotiza tu evento');
+$('#sh-web').onclick=()=>share(marca==='MAWEY'?'https://behindmx.mx/mawey.html':'https://behindmx.mx','BEHIND');
+setMarca(marca);
+</script>
+</body>
+</html>
