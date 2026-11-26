@@ -107,7 +107,7 @@ textarea{min-height:110px;resize:vertical}
     
     <a class="big" id="wa-home" target="_blank" rel="noopener"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 21l1.65-3.8A9 9 0 1 1 7.8 19.6L3 21"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg></div><div><b>Hablar con un ejecutivo</b><span>Por WhatsApp · 56 2815 0696</span></div></a>
     <button class="big" onclick="go('s-share')"><div class="ic"><svg class="i" viewBox="0 0 24 24"><circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.7 10.7l6.6-3.4M8.7 13.3l6.6 3.4"/></svg></div><div><b>Compartir</b><span>Manda la app a quien organiza un evento</span></div></button>
-    <button class="big" id="b-inst" onclick="instalar()"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></div><div><b>Descargar la app</b><span>Tenla en tu celular, como cualquier app</span></div></button>
+    <button class="big" id="b-inst" onclick="instalar()"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></div><div><b>Descargar la app</b><span>iPhone: desde Safari · Android: desde Chrome</span></div></button>
   </div>
 </section>
 
@@ -189,12 +189,12 @@ textarea{min-height:110px;resize:vertical}
 <div id="modal" style="display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);align-items:flex-end;justify-content:center" onclick="if(event.target===this)this.style.display='none'">
   <div style="background:var(--soft);width:100%;max-width:520px;border-radius:22px 22px 0 0;padding:26px 22px calc(26px + env(safe-area-inset-bottom))">
     <p class="serif" style="font-size:28px;color:var(--bg);margin-bottom:6px">Descarga la app</p>
-    <div id="m-ios"><p class="sub">En iPhone, desde <b>Safari</b>:</p>
+    <div id="m-ios"><p class="sub">En iPhone, ábrela en <b>Safari</b> (desde otro navegador no aparece la opción):</p>
       <ol style="margin:0 0 6px 20px;line-height:2">
         <li>Toca <b>Compartir</b> <svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px;vertical-align:-3px"><path d="M12 15V3M8 7l4-4 4 4M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg> (abajo en la barra)</li>
         <li>Elige <b>"Agregar a inicio"</b></li>
         <li>Toca <b>Agregar</b>. ¡Listo!</li></ol></div>
-    <div id="m-and" style="display:none"><p class="sub">En Android, desde <b>Chrome</b>: toca el menú <b>⋮</b> y elige <b>"Instalar app"</b> o <b>"Agregar a pantalla principal"</b>.</p></div>
+    <div id="m-and" style="display:none"><p class="sub">En Android, ábrela en <b>Chrome</b> (desde otro navegador no se instala): toca el menú <b>⋮</b> y elige <b>"Instalar app"</b> o <b>"Agregar a pantalla principal"</b>.</p></div>
     <button class="btn" onclick="document.getElementById('modal').style.display='none'">ENTENDIDO</button>
   </div>
 </div>
@@ -224,7 +224,8 @@ MAWEY:{h:'Lleva el truck a tu evento',l:'Raíz mexicana. Sabores del mundo.',log
  comu:'Únete a la familia MAWEY',perk:'Entérate dónde va a estar el truck y qué hay nuevo en el menú.'}};
 const PRES=['Menos de $30k','$30k–$80k','$80k–$200k','$200k–$500k','Más de $500k'];
 const LUG=['Oficina','Salón','Jardín','Hotel','Hacienda','Terraza / roof','Estacionamiento','Casa','Otro'];
-let marca=new URLSearchParams(location.search).get('marca')==='mawey'?'MAWEY':'BEHIND',flow=[],idx=0,mode='cotizar';
+const SOLO_MAWEY=/mawey-app/.test(location.pathname)||document.documentElement.dataset.solo==='mawey';
+let marca=(SOLO_MAWEY||new URLSearchParams(location.search).get('marca')==='mawey')?'MAWEY':'BEHIND',flow=[],idx=0,mode='cotizar';
 const DEMO=!/behindmx\.mx$/.test(location.hostname);if(DEMO)document.getElementById('demo').style.display='block';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 $('#av-b').src=ASSETS.mono;$('#av-m').src=ASSETS.miso;$('#qr').src=ASSETS.qr;
@@ -279,7 +280,7 @@ $('#f').onsubmit=async e=>{e.preventDefault();
 function reset(){$('#f').reset();$$('.chip.on,.opt.on').forEach(x=>x.classList.remove('on'));setMarca(marca);go('s-home')}
 function share(url,title){if(navigator.share)navigator.share({title,url}).catch(()=>{});else{navigator.clipboard&&navigator.clipboard.writeText(url);alertless('Enlace copiado')}}
 function alertless(t){const n=document.createElement('div');n.textContent=t;n.style.cssText='position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:20px;font:14px Jost;z-index:30';document.body.appendChild(n);setTimeout(()=>n.remove(),2200)}
-$('#sh').onclick=()=>share('https://behindmx.mx/app.html'+(marca==='MAWEY'?'?marca=mawey':''),'BEHIND · Cotiza tu evento');
+$('#sh').onclick=()=>share(SOLO_MAWEY?'https://behindmx.mx/mawey-app.html':'https://behindmx.mx/app.html'+(marca==='MAWEY'?'?marca=mawey':''),marca+' · Cotiza tu evento');
 $('#sh-web').onclick=()=>share(marca==='MAWEY'?'https://behindmx.mx/mawey.html':'https://behindmx.mx','BEHIND');
 let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e});
 const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
@@ -287,6 +288,7 @@ if(standalone)$('#b-inst').style.display='none';
 function instalar(){if(dp){dp.prompt();dp=null;return}const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||!/android/i.test(navigator.userAgent);
  $('#m-ios').style.display=ios?'block':'none';$('#m-and').style.display=ios?'none':'block';$('#modal').style.display='flex'}
 if(new URLSearchParams(location.search).get('instalar')&&!standalone)setTimeout(instalar,600);
+if(SOLO_MAWEY)document.querySelector('.sw').style.display='none';
 setMarca(marca);
 </script>
 </body>
